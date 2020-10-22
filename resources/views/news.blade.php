@@ -15,5 +15,7 @@
     <p>{{$news2}}</p>
     <p>{{$news3}}</p>
 
+
+
 </body>
 </html>
