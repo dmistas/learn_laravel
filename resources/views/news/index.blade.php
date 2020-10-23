@@ -8,13 +8,19 @@
     <title>Document</title>
 </head>
 <body>
+@if(isset($categories))
+    @foreach($categories as $c)
+        <a href="{{route('category_id', ['id'=>$c['category_id']])}}"><h4>{{$c['title']}}</h4></a>
+
+    @endforeach
+@endif
 
 
-
-    <p>{{$news1}}</p>
-    <p>{{$news2}}</p>
-    <p>{{$news3}}</p>
-
+{{--@forelse ($users as $user)--}}
+{{--    <li>{{ $user->name }}</li>--}}
+{{--@empty--}}
+{{--    <p>No users</p>--}}
+{{--@endforelse--}}
 
 
 </body>

@@ -17,22 +17,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/news', [\App\Http\Controllers\Admin\NewsController::class, 'index']);
+    Route::get('/news/create', [\App\Http\Controllers\Admin\NewsController::class, 'create']);
+    Route::get('/news/edit/{id}', [\App\Http\Controllers\Admin\NewsController::class, 'edit'])
+        ->where('id', '\d+');
+    Route::get('/news/delete/{id}', [\App\Http\Controllers\Admin\NewsController::class, 'delete'])
+        ->where('id', '\d+');;
+});
+
 Route::get('/hello/{name}', function (string $name) {
     echo "Hello, $name!";
 })->where('name', '\w+');
 
-Route::get('/about', function () {
-    echo "Мы студенты geekbrains, изучаем Laravel. Хотим работать backend разработчиками!";
-});
+Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index']);
 
-Route::get('/news', function () {
-    $data = ['news1' => 'Как зарабатывать на разработке мобильных приложений? Как запустить свой стартап?',
-        'news2' => 'Уровень зарплат java-разработчика продолжает расти',
-        'news3' => 'Блокчейн-разработка — новый курс GeekBrains'];
-    return view('news', $data);
-//    я пока не разобрался почему blade не видит если ему передавать массив $data
-//    в виде return view('news', $data), возникает ошибка Undefined variable: data
-});
+Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'showNews'])
+    ->where('id', '\d+');
 
 
-
+Route::get('/category/{id}', [\App\Http\Controllers\NewsController::class, 'showCategoryNews'])
+    ->where('id', '\d+')->name('category_id');
+Route::get('/categories', [\App\Http\Controllers\NewsController::class, 'index'])
+    ->name('news');
