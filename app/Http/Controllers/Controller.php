@@ -68,6 +68,13 @@ class Controller extends BaseController
             'title' => 'Новости технологий',
             'description' => 'Вышла новая версия Laravel'
         ],
+        [
+            'id' => 9,
+            'category_id' => 3,
+            'slug' => 'nine',
+            'title' => 'Новости культуры',
+            'description' => 'Что-то о культуре'
+        ],
     ];
 
     private $category = [
