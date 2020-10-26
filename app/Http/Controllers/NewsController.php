@@ -15,17 +15,20 @@ class NewsController extends Controller
 
     public function showCategoryNews(int $category_id)
     {
-
-//        echo "Это новость номер: $category_id";
-        $newsFromCategory = $this->getCategoryNews($category_id);
-        dd($newsFromCategory);
+        $newsFromCategory = array();
+        foreach ($this->getAllNews() as $news){
+            if ($news['category_id']==$category_id){
+                $newsFromCategory[]=$news;
+            }
+        }
+//        dd($newsFromCategory);
         return view('news.index', ['newsFromCategory' => $newsFromCategory]);
     }
     public function showNews(int $id)
     {
         $news = $this->getNews($id);
-        dd($news);
-        view('news.show', ['news'=>$news]);
+//        dd($news);
+        return view('news.show', ['news'=>$news]);
     }
 
 }

@@ -33,10 +33,11 @@ Route::get('/hello/{name}', function (string $name) {
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index']);
 
 Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'showNews'])
-    ->where('id', '\d+');
+    ->where('id', '\d+')->name('news_id');
 
 
 Route::get('/category/{id}', [\App\Http\Controllers\NewsController::class, 'showCategoryNews'])
     ->where('id', '\d+')->name('category_id');
 Route::get('/categories', [\App\Http\Controllers\NewsController::class, 'index'])
     ->name('news');
+Route::view('/login', 'auth/login');

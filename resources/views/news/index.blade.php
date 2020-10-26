@@ -15,12 +15,14 @@
     @endforeach
 @endif
 
+@if(isset($newsFromCategory))
+    @foreach($newsFromCategory as $n)
+        <a href="{{route('news_id', ['id'=>$n['id']])}}"><h4>{{$n['title']}}</h4></a>
 
-{{--@forelse ($users as $user)--}}
-{{--    <li>{{ $user->name }}</li>--}}
-{{--@empty--}}
-{{--    <p>No users</p>--}}
-{{--@endforelse--}}
+    @endforeach
+@endif
+
+
 
 
 </body>

@@ -47,6 +47,27 @@ class Controller extends BaseController
             'title' => 'Пятая новость',
             'description' => 'Описание пятой новости'
         ],
+        [
+            'id' => 6,
+            'category_id' => 5,
+            'slug' => 'six',
+            'title' => 'Шестая новость',
+            'description' => 'Описание 6 новости'
+        ],
+        [
+            'id' => 7,
+            'category_id' => 5,
+            'slug' => 'seven',
+            'title' => 'Политика сегодня',
+            'description' => 'В политике все как всегда'
+        ],
+        [
+            'id' => 8,
+            'category_id' => 4,
+            'slug' => 'eight',
+            'title' => 'Новости технологий',
+            'description' => 'Вышла новая версия Laravel'
+        ],
     ];
 
     private $category = [
@@ -68,7 +89,12 @@ class Controller extends BaseController
         [
             'category_id' => 4,
             'slug' => 'technologies',
-            'title' => 'Технолдогии',
+            'title' => 'Технологии',
+        ],
+        [
+            'category_id' => 5,
+            'slug' => 'politics',
+            'title' => 'Политика',
         ],
     ];
 
