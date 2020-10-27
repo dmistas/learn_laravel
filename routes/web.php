@@ -41,3 +41,7 @@ Route::get('/category/{id}', [\App\Http\Controllers\NewsController::class, 'show
 Route::get('/categories', [\App\Http\Controllers\NewsController::class, 'index'])
     ->name('news');
 Route::view('/login', 'auth/login');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
