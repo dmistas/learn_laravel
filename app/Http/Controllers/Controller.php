@@ -11,6 +11,21 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $orders = [
+        [
+            'fio' => 'asdad',
+            'phone' => 'asdasd',
+            'email' => 'asdasd@asdasd.we',
+            'description' => 'asasdasddas',
+        ],
+        [
+            'fio' => 'asdad2',
+            'phone' => 'asdasd2',
+            'email' => 'asdasd2@asdasd.we',
+            'description' => 'sads22asasdasddas',
+        ],
+    ];
+
     private $news = [
         [
             'id' => 1,

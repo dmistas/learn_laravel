@@ -1,4 +1,8 @@
 @extends('layouts.main')
+
+@section('title-block')
+    Новость {{ $news['title'] }}
+@endsection
 @section('content')
 
 <div class="row">

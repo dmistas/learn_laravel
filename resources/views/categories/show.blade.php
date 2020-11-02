@@ -1,7 +1,9 @@
 @extends('layouts.main')
+@section('title-block')
+    Новости категории
+@endsection
+
 @section('content')
-
-
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             @forelse( $newsFromCategory as $n)

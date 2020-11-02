@@ -3,28 +3,90 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
+use function React\Promise\all;
 
 class NewsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //return all news
-        echo "Админ: список всех новостей";
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        echo "Создаем новость";
+        return view('admin.news.create');
     }
 
-    public function edit(int $id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        echo "Редактирование новости $id";
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+        $data = $request->only('title', 'author');
+        return response()->json($data);
     }
 
-    public function delete(int $id)
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\News $news
+     * @return \Illuminate\Http\Response
+     */
+    public function show(News $news)
     {
-        echo "Удаление новости $id";
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\News $news
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(News $news)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\News $news
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, News $news)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\Models\News $news
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(News $news)
+    {
+        //
     }
 }

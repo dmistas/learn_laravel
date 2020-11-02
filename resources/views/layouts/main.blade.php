@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Блог на Laravel</title>
+    <title>Блог на Laravel | @yield('title-block')</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -30,12 +30,16 @@
 <body>
 
 <!-- Navigation -->
-<x-navigation></x-navigation>
+<x-navigation2></x-navigation2>
 @php $title = "Компонент"; @endphp
-
-<!-- Page Header -->
+<!-- Hero Header -->
+@if(Request::is('categories'))
 <x-header :title=$title></x-header>
-
+@endif
+<!--Header for single news-->
+@if(Request::is('news/*'))
+    <x-header_news></x-header_news>
+@endif
 <!-- Main Content -->
 <div class="container">
     @yield('content')

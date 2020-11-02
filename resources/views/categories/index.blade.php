@@ -1,8 +1,9 @@
 @extends('layouts.main')
+@section('title-block')
+    Категории новостей
+@endsection
+
 @section('content')
-
-
-
 
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">

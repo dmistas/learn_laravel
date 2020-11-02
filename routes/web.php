@@ -18,12 +18,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/news', [\App\Http\Controllers\Admin\NewsController::class, 'index']);
-    Route::get('/news/create', [\App\Http\Controllers\Admin\NewsController::class, 'create']);
-    Route::get('/news/edit/{id}', [\App\Http\Controllers\Admin\NewsController::class, 'edit'])
-        ->where('id', '\d+');
-    Route::get('/news/delete/{id}', [\App\Http\Controllers\Admin\NewsController::class, 'delete'])
-        ->where('id', '\d+');;
+    Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class);
 });
 
 Route::get('/hello/{name}', function (string $name) {
@@ -42,6 +37,7 @@ Route::get('/category/{id}', [\App\Http\Controllers\CategoryController::class, '
 Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'index'])
     ->name('categories');
 
+Route::resource('/orders', \App\Http\Controllers\OrdersController::class);
 
 Route::view('/login', 'auth/login');
 
