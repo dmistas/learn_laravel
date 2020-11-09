@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('content')
     <div class="col-8 offset-2">
         <h3>Создание новости</h3>

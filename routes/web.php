@@ -28,8 +28,12 @@ Route::get('/hello/{name}', function (string $name) {
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])
     ->name('about');
 
-Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'showNews'])
+Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])
+    ->name('all_news');
+Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'showNewsByID'])
     ->where('id', '\d+')->name('news_id');
+Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'showNewsBySlug'])
+    ->name('news_slug');
 
 
 Route::get('/category/{id}', [\App\Http\Controllers\CategoryController::class, 'showCategoryNews'])

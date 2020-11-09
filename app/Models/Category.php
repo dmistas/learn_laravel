@@ -6,23 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class News extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $table="news";
+    protected $table="categories";
 
-    public function getAllNews()
+    public function getAllCategories()
     {
         return DB::table($this->table)->get();
     }
 
-    public function getNewsBySlug(string $slug)
-    {
-        return DB::table($this->table)->where(['slug'=>$slug])->first();
-    }
-
-    public function getNewsByID(int $id)
+    public function getCategoryNews(int $id)
     {
         return DB::table($this->table)->find($id);
     }
