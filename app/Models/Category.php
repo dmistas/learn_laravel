@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $table="categories";
+    protected $table = "categories";
 
     public function getAllCategories()
     {
@@ -19,6 +19,12 @@ class Category extends Model
 
     public function getCategoryNews(int $id)
     {
-        return DB::table($this->table)->find($id);
+        $newsFromCategory = DB::table('categories_has_news')
+            ->join('news', 'categories_has_news.news_id', '=', 'news.id')
+            ->select('news.*')
+            ->where('category_id', $id)
+            ->get();
+
+        return $newsFromCategory;
     }
 }

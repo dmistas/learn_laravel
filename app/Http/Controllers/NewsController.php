@@ -12,14 +12,7 @@ class NewsController extends Controller
     {
         $objNews = new News();
         $news = $objNews->getAllNews();
-//        dd($news);
         return view('news.index', ['news' => $news]);
-    }
-
-    public function showNews(int $id)
-    {
-        $news = $this->getNews($id);
-        return view('news.show', ['news' => $news]);
     }
 
     public function showNewsBySlug(string $slug)

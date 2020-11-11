@@ -10,11 +10,11 @@
 
     <div class="col-8 offset-2">
 
-        @if(isset($_GET['fio']))
+        @if(request()->get('fio'))
             <h4>Ваше имя</h4>
-            <h3 style="color: green">{{ $_GET['fio'] }}</h3>
+            <h3 style="color: green">{{ request()->get('fio') }}</h3>
             <h4>Ваш отзыв:</h4>
-            <p>{{ $_GET['description'] }}</p>
+            <p>{{ request()->get('description') }}</p>
         @endif
         <h3>Оставить отзыв</h3>
 

@@ -8,12 +8,12 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             @forelse( $newsFromCategory as $n)
                 <div class="post-preview">
-                    <a href="{{route('news_id', ['id'=>$n['id']])}}">
+                    <a href="{{route('news_id', ['id'=>$n->id])}}">
                         <h2 class="post-title">
-                            {{$n['title']}}
+                            {{$n->title}}
                         </h2>
                         <h3 class="post-subtitle">
-                            {{$n['title']}}
+                            {{$n->title}}
                         </h3>
                     </a>
                     <p class="post-meta">Posted by

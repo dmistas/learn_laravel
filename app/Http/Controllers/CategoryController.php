@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = $this->getAllCategories();
+        $objCategory = new Category();
+        $categories = $objCategory->getAllCategories();
         return view('categories.index', ['categories' => $categories]);
     }
 
     public function showCategoryNews(int $category_id)
     {
-        $newsFromCategory = array();
-        foreach ($this->getAllNews() as $news) {
-            if ($news['category_id'] == $category_id) {
-                $newsFromCategory[] = $news;
-            }
-        }
+        $objCategory = new Category();
+        $newsFromCategory = $objCategory->getCategoryNews($category_id);
         return view('categories.show', ['newsFromCategory' => $newsFromCategory]);
     }
 }
