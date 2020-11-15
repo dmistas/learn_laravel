@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Str;
 use function React\Promise\all;
 
 class NewsController extends Controller
@@ -16,7 +18,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::orderBy('id', 'desc')->paginate(10);
+        return view('admin.news.index', ['news' => $news]);
     }
 
     /**
@@ -41,8 +44,13 @@ class NewsController extends Controller
             'title' => 'required',
             'description' => 'required',
         ]);
-        $data = $request->only('title', 'author');
-        return response()->json($data);
+        $data = $request->only('title', 'author', 'description');
+        $data['slug']= Str::slug($data['title']);
+        $create = News::create($data);
+        if(!$create){
+            return back()->with('fail', 'Не удалось добавить новость');
+        }
+        return back()->with('success', 'Новость успешно добавлена');
     }
 
     /**
@@ -53,7 +61,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-
+        echo "in the show method";
     }
 
     /**
@@ -64,7 +72,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        return view('admin.news.edit', ['news'=>$news]);
     }
 
     /**
@@ -76,7 +84,16 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+        ]);
+        $data=$request->only(['title', 'author', 'description']);
+        $data['slug']=Str::slug($data['title']);
+        $news->fill($data);
+        if($news->save()){
+            return redirect()->route('news.index');
+        }
+        return back();
     }
 
     /**
@@ -87,6 +104,7 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        $news->delete();
+        return redirect()->route('news.index');
     }
 }

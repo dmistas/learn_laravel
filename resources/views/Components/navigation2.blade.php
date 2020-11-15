@@ -13,6 +13,9 @@
                 <a class="nav-link" href="{{ route('categories') }}">Категории</a>
             </li>
             <li class="nav-item mx-3">
+                <a class="nav-link" href="{{ route('all_news') }}">Новости</a>
+            </li>
+            <li class="nav-item mx-3">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item mx-3">

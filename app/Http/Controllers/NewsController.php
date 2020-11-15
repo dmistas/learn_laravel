@@ -10,22 +10,19 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $objNews = new News();
-        $news = $objNews->getAllNews();
+        $news = News::orderBy('id', 'desc')->paginate(3);
         return view('news.index', ['news' => $news]);
     }
 
     public function showNewsBySlug(string $slug)
     {
-        $objNews = new News();
-        $news = $objNews->getNewsBySlug($slug);
+        $news = News::where('slug', $slug)->first();
         return view('news.show', ['news'=>$news]);
     }
 
     public function showNewsByID(int $id)
     {
-        $objNews = new News();
-        $news = $objNews->getNewsByID($id);
+        $news = News::find($id);
         return view('news.show', ['news'=>$news]);
     }
 

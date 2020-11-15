@@ -21,10 +21,10 @@
         <tbody>
         @forelse($orders as $order)
             <tr class="table-active">
-                <td>{{ $order['fio'] }}</td>
-                <td>{{ $order['phone'] }}</td>
-                <td>{{ $order['email'] }}</td>
-                <td>{{ $order['description'] }}</td>
+                <td>{{ $order->name }}</td>
+                <td>{{ $order->phone }}</td>
+                <td>{{ $order->email }}</td>
+                <td>{{ $order->text }}</td>
             </tr>
         @empty
             <tr class="table-active">
@@ -36,6 +36,9 @@
         @endforelse
         </tbody>
     </table>
+    <div class="clearfix">
+        {{ $orders->links() }}
+    </div>
     <button class="btn btn-block"><a href="/orders/create">Добавить заказ</a></button>
 @endsection
 

@@ -10,10 +10,11 @@
             @forelse( $categories as $c)
                 <div class="post-preview">
                     <a href="{{route('category_id', ['id'=>$c->id])}}">
-                        <h2 class="post-title">
+                        <h4 class="post-title">
                             {{$c->title}}
-                        </h2>
+                        </h4>
                     </a>
+                    <div><img src="{{ $c->image }}" alt="{{ $c->image }}"></div>
 
                 </div>
                 <hr>
@@ -23,7 +24,7 @@
 
         <!-- Pager -->
             <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+                {{ $categories->links() }}
             </div>
         </div>
     </div>

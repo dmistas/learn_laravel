@@ -1,6 +1,13 @@
 @extends('Layouts.app')
 @section('content')
+
+
     <div class="col-8 offset-2">
+        @if(session()->has('success'))
+            <div class="alert alert-success">Новость успешно добавлена</div>
+        @elseif(session()->has('fail'))
+            <div class="alert alert-danger">Не удалось добвить новость</div>
+        @endif
         <h3>Создание новости</h3>
     <form action="{{ route('news.store') }}" method="post">
         @csrf

@@ -36,7 +36,7 @@ Route::get('/news/{slug}', [\App\Http\Controllers\NewsController::class, 'showNe
     ->name('news_slug');
 
 
-Route::get('/category/{id}', [\App\Http\Controllers\CategoryController::class, 'showCategoryNews'])
+Route::get('/category/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])
     ->where('id', '\d+')->name('category_id');
 Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'index'])
     ->name('categories');

@@ -12,10 +12,14 @@ class News extends Model
 
     protected $table="news";
 
-    public function getAllNews()
-    {
-        return DB::table($this->table)->get();
-    }
+    protected $fillable =[
+      'title', 'author', 'description', 'slug',
+    ];
+
+    protected $casts = [
+        'published'=> 'boolean'
+    ];
+
 
     public function getNewsBySlug(string $slug)
     {

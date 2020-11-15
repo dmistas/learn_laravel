@@ -6,7 +6,7 @@ use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class CategoriesHasNewsSeeder extends Seeder
+class OrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class CategoriesHasNewsSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('categories_has_news')->insert($this->getData());
+        \DB::table('orders')->insert($this->getData());
     }
 
     public function getData(): array
@@ -24,10 +24,15 @@ class CategoriesHasNewsSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
-                'category_id' => $faker->numberBetween($min = 1, $max = 5),
-                'news_id' => $faker->numberBetween($min = 1, $max = 20),
+                'name' => Str::random(10),
+                'phone'=> $faker->phoneNumber(),
+                'email'=> Str::random(10).'@gmail.com',
+                'text' => $faker->realText(mt_rand(100, 200)),
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
         }
         return $data;
     }
+
 }
