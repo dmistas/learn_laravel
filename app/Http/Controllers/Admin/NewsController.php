@@ -50,9 +50,10 @@ class NewsController extends Controller
     public function store(NewsStore $request)
     {
         $data = $request->only('title', 'author', 'description');
+        $category_id = $request->only('category_id');
         $data['slug'] = Str::slug($data['title']);
         $create = News::create($data);
-//        TODO add inserting to category_has_news
+        $create -> categories() -> attach($category_id);
         if (!$create) {
             return back()->with('fail', 'Не удалось добавить новость');
         }
@@ -93,7 +94,10 @@ class NewsController extends Controller
     {
         $data = $request->only(['title', 'author', 'description']);
         $data['slug'] = Str::slug($data['title']);
+        $category_id = $request->only('category_id');
         $news->fill($data);
+        $news -> categories() -> detach();
+        $news -> categories() -> attach($category_id);
         if ($news->save()) {
             return redirect()->route('news.index');
         }
