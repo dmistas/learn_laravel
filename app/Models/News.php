@@ -19,15 +19,10 @@ class News extends Model
     protected $casts = [
         'published'=> 'boolean'
     ];
-
-
-    public function getNewsBySlug(string $slug)
+    public function categories()
     {
-        return DB::table($this->table)->where(['slug'=>$slug])->first();
+        return $this->belongsToMany(Category::class, 'categories_has_news', 'news_id',
+            'category_id');
     }
 
-    public function getNewsByID(int $id)
-    {
-        return DB::table($this->table)->find($id);
-    }
 }

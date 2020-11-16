@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsStore;
+use App\Http\Requests\NewsUpdate;
+use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use function React\Promise\all;
 
@@ -16,6 +20,10 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private function availableCategories(){
+        return Category::all();
+    }
+
     public function index()
     {
         $news = News::orderBy('id', 'desc')->paginate(10);
@@ -29,7 +37,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        $availableCategories = $this->availableCategories();
+        return view('admin.news.create', ['categories' => $availableCategories]);
     }
 
     /**
@@ -38,19 +47,16 @@ class NewsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsStore $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
         $data = $request->only('title', 'author', 'description');
-        $data['slug']= Str::slug($data['title']);
+        $data['slug'] = Str::slug($data['title']);
         $create = News::create($data);
-        if(!$create){
+//        TODO add inserting to category_has_news
+        if (!$create) {
             return back()->with('fail', 'Не удалось добавить новость');
         }
-        return back()->with('success', 'Новость успешно добавлена');
+        return redirect()->route('news.index')->with('success', 'Новость успешно добавлена');
     }
 
     /**
@@ -72,7 +78,8 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('admin.news.edit', ['news'=>$news]);
+        $availableCategories = $this->availableCategories();
+        return view('admin.news.edit', ['news' => $news, 'categories'=>$availableCategories]);
     }
 
     /**
@@ -82,18 +89,15 @@ class NewsController extends Controller
      * @param \App\Models\News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(NewsUpdate $request, News $news)
     {
-        $request->validate([
-            'title'=>'required',
-        ]);
-        $data=$request->only(['title', 'author', 'description']);
-        $data['slug']=Str::slug($data['title']);
+        $data = $request->only(['title', 'author', 'description']);
+        $data['slug'] = Str::slug($data['title']);
         $news->fill($data);
-        if($news->save()){
+        if ($news->save()) {
             return redirect()->route('news.index');
         }
-        return back();
+        return back()->with('fail', 'Не удалось сохранить новость');
     }
 
     /**
@@ -107,4 +111,6 @@ class NewsController extends Controller
         $news->delete();
         return redirect()->route('news.index');
     }
+
+
 }

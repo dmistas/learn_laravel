@@ -5,6 +5,11 @@
 
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+            @if(session()->has('success'))
+                <div class="alert alert-success">Новость успешно добавлена</div>
+            @elseif(session()->has('fail'))
+                <div class="alert alert-danger">Не удалось добвить новость</div>
+            @endif
 
             @forelse( $news as $n)
                 <div class="post-preview">
@@ -18,7 +23,7 @@
                     </p>
                     <p class="post-meta">Опубликовал
                         <a href="#">{{$n->author}}</a>
-                        {{$n->created_at}}
+                        {{$n->updated_at->format('d-m-Y (H:i)')}}
                     </p>
                     <a class="btn btn-success" href="{{ route('news.edit', ['news'=>$n->id]) }}">Редактировать</a>
                     <form action="{{ route('news.destroy', ['news'=>$n->id]) }}" method="POST">
@@ -38,4 +43,5 @@
             </div>
         </div>
     </div>
-@endsection
+@stop
+
