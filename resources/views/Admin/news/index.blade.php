@@ -10,6 +10,9 @@
             @elseif(session()->has('fail'))
                 <div class="alert alert-danger">Не удалось добвить новость</div>
             @endif
+                <div>
+                    <a class="btn btn-success" href="{{ route('news.create') }}">Добавить новость</a>
+                </div>
 
             @forelse( $news as $n)
                 <div class="post-preview">

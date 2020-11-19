@@ -17,8 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class);
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', [\App\Http\Controllers\Account\IndexController::class, 'index'])
+            ->name('account');
+    });
+
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+        Route::get('/', [\App\Http\Controllers\Admin\IndexController::class, 'index']);
+        Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])
+            ->name('admin_all_users');
+
+        Route::get('/users/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'deleteUser'])
+            ->where('id', '\d+')->name('delete_user');
+        Route::get('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'changeRole'])
+            ->where('id', '\d+')->name('change_user_role');
+        Route::resource('/news', \App\Http\Controllers\Admin\NewsController::class);
+    });
 });
 
 Route::get('/hello/{name}', function (string $name) {

@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use function React\Promise\all;
 
 class NewsController extends Controller
 {
@@ -80,7 +79,14 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $availableCategories = $this->availableCategories();
-        return view('admin.news.edit', ['news' => $news, 'categories'=>$availableCategories]);
+        $currentCategory = $news -> categories() -> get() -> first();
+//        TODO insert current directory in view
+        dump($currentCategory);
+        return view('admin.news.edit', [
+            'news' => $news,
+            'categories'=>$availableCategories,
+            'current_category' => $currentCategory,
+            ]);
     }
 
     /**

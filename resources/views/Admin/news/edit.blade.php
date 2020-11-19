@@ -13,15 +13,6 @@
         <form method="post" action="{{ route('news.update', ['news' => $news]) }}">
             @method('PUT')
             @csrf
-{{--            <p>Заголовок: <br><input class="form-control" name="title" value="{{ $news->title }}" ></p>--}}
-{{--            <p>Автор: <br><input class="form-control" name="author" value="{{ $news->author }}" ></p>--}}
-{{--            <p>Описание: <br><textarea class="form-control" name="description">{!! $news->description !!}</textarea></p>--}}
-
-
-
-
-
-
             <p>Заголовок<br><input class="form-control" type="text" name="title" value="{{ $news->title }}">
             @error('title')
             <div class="alert alert-danger">
@@ -47,7 +38,8 @@
             <label for="category">Категория</label>
             <select class="custom-select d-block w-100" name="category_id">
 
-                <option value="">Выберите категорию...</option>
+{{--                <option value="{{ $current_category -> id }}">{{ $current_category -> title }}</option>--}}
+                <option value="">...</option>
                 @foreach($categories as $category)
                     <option value="{{ $category -> id }}">{{ $category -> title }}</option>
                 @endforeach

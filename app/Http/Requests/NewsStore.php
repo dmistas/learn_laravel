@@ -29,4 +29,13 @@ class NewsStore extends FormRequest
             'category_id' => 'required',
         ];
     }
+
+    public function customAttributes()
+    {
+        return [
+            'title' => 'Заголовок',
+            'category_id' => 'Категория',
+            'author' => 'Автор'
+        ];
+    }
 }
