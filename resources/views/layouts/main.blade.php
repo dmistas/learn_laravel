@@ -38,7 +38,7 @@
 @endif
 <!--Header for single news-->
 @if(Request::is('news/*'))
-    <x-header_news></x-header_news>
+    <x-header-news></x-header-news>
 @endif
 <!-- Main Content -->
 <div class="container">
