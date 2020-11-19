@@ -30,7 +30,7 @@
 <body>
 
 <!-- Navigation -->
-<x-navigation2></x-navigation2>
+<x-navigation-2></x-navigation-2>
 @php $title = "Компонент"; @endphp
 <!-- Hero Header -->
 @if(Request::is('categories'))
