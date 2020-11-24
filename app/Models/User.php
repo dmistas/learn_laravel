@@ -46,4 +46,15 @@ class User extends Authenticatable
         'last_login_at'=> 'datetime',
         'is_admin' => 'boolean',
     ];
+
+    public $timestamps = false;
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function saveSocialUser(array $data)
+    {
+        return $this->fill($data)->save();
+    }
 }

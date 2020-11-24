@@ -38,7 +38,6 @@
             <label for="category">Категория</label>
             <select class="custom-select d-block w-100" name="category_id">
 
-{{--                <option value="{{ $current_category -> id }}">{{ $current_category -> title }}</option>--}}
                 <option value="">...</option>
                 @foreach($categories as $category)
                     <option value="{{ $category -> id }}">{{ $category -> title }}</option>

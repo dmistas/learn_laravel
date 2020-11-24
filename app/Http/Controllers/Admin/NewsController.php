@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NewsEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsStore;
 use App\Http\Requests\NewsUpdate;
@@ -56,6 +57,7 @@ class NewsController extends Controller
         if (!$create) {
             return back()->with('fail', 'Не удалось добавить новость');
         }
+        event(new NewsEvent($create));
         return redirect()->route('news.index')->with('success', 'Новость успешно добавлена');
     }
 
@@ -81,7 +83,6 @@ class NewsController extends Controller
         $availableCategories = $this->availableCategories();
         $currentCategory = $news -> categories() -> get() -> first();
 //        TODO insert current directory in view
-        dump($currentCategory);
         return view('admin.news.edit', [
             'news' => $news,
             'categories'=>$availableCategories,

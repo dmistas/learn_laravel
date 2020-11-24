@@ -56,7 +56,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
+                                <a class="btn btn-secondary" href="{{ route('vk.login') }}">VK</a>
+                                <a class="btn btn-secondary" href="{{ route('fb.login') }}">FB</a>
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

@@ -13,7 +13,7 @@ class News extends Model
     protected $table="news";
 
     protected $fillable =[
-      'title', 'author', 'description', 'slug',
+      'title', 'author', 'description', 'slug', 'link', 'image',
     ];
 
     protected $casts = [
